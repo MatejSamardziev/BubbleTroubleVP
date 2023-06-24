@@ -18,9 +18,15 @@ namespace BubbleTrouble
             InitializeComponent();
             Point p = new Point(this.Width / 2, this.Height-40);
             scene = new Scene(new Hero(p));
-            Invalidate();
+            
             DoubleBuffered = true;
             timer1.Start();
+            RedCircleTimer.Start();
+            Point p2 = new Point(150, 150);
+
+            Circle c = new Circle(30,Color.Red,p2,this.Width,this.Height);
+            scene.RedCircles.Add(c);
+            Invalidate();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -43,6 +49,10 @@ namespace BubbleTrouble
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
+            if (scene.lines.Count>0)
+            {
+                scene.RemoveLine();
+            }
             Point A = new Point(scene.hero.Center.X - 30, scene.hero.Center.Y);
             Point B = new Point(scene.hero.Center.X-30, scene.hero.Center.Y - 10);
             
@@ -60,6 +70,41 @@ namespace BubbleTrouble
                 temp.Y = temp.Y - 10;
                 l.B = temp; 
             }
+
+            if (scene.isHit())
+            {
+                RedCircleTimer.Stop();
+                timer1.Stop();
+                MessageBox.Show("Game over");
+
+            }
+
+            if (scene.lines.Count != 0)
+            {
+                Line l2 = scene.lines.ElementAt(0);
+                if (l2.HasLineHitCircle(scene.RedCircles.ElementAt(0)))
+                {
+                    MessageBox.Show("Ja udri");
+                }
+            }
+            
+            
+
+
+
+
+            Invalidate();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            foreach (Circle c in scene.RedCircles)
+            {
+
+                c.Move(Width, Height);
+
+            }
+           
             Invalidate();
         }
     }

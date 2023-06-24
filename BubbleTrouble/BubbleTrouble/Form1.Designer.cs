@@ -30,12 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.RedCircleTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // timer1
             // 
-            this.timer1.Interval = 50;
+            this.timer1.Interval = 35;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // RedCircleTimer
+            // 
+            this.RedCircleTimer.Interval = 15;
+            this.RedCircleTimer.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
@@ -54,6 +60,7 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer RedCircleTimer;
     }
 }
 

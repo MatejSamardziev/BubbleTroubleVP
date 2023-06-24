@@ -13,10 +13,12 @@ namespace BubbleTrouble
 
         public List<Line> lines { get; set; }//samo edna linija ke ima ama koga ke ja snima da ja izbrisham
 
+        public List<Circle> RedCircles { get; set; }
         public Scene(Hero hero)
         {
             this.hero = hero;
             lines = new List<Line>();
+            RedCircles = new List<Circle>();
         }
 
         public void Draw(Graphics g)
@@ -26,6 +28,16 @@ namespace BubbleTrouble
             {
                 lines[0].Draw(g);
             }
+
+            foreach(Circle c in RedCircles)
+            {
+                c.Draw(g);
+            }
+        }
+
+        public void AddRedCircle(Circle c)
+        {
+            RedCircles.Add(c);
         }
 
         public void AddLine(Line l)
@@ -35,6 +47,20 @@ namespace BubbleTrouble
         public void RemoveLine()
         {
             lines.RemoveAt(0);
+        }
+
+        public bool isHit()
+        {
+            foreach(Circle c in RedCircles)
+            {
+                if (c.isHit(hero))
+                {
+                    return true;
+                    break;
+                }
+            }
+            return false;
+
         }
            
     }
