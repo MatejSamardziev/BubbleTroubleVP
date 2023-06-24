@@ -63,6 +63,9 @@ namespace BubbleTrouble
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+
+            scene.outofbounds(Width);
+
             if (scene.lines.Count != 0)
             {
                 Line l=scene.lines.ElementAt(0);

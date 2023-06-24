@@ -62,6 +62,11 @@ namespace BubbleTrouble
             return false;
 
         }
-           
+
+        public void outofbounds(int width)
+        {
+            hero.outofBounds(width);
+        }
+
     }
 }
